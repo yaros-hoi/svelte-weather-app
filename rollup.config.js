@@ -3,8 +3,10 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
-import {config} from 'dotenv';
 import replace from '@rollup/plugin-replace';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -39,13 +41,8 @@ export default {
 	},
 	plugins: [
 		replace({
-			// stringify the object
-			__myapp: JSON.stringify({
-				env: {
-					isProd: production,
-					...config().parsed // attached the .env config
-				}
-			}),
+			MAP_TOKEN: JSON.stringify(process.env.MAP_TOKEN),
+			OPEN_WEATHER_MAP_ID: JSON.stringify(process.env.OPEN_WEATHER_MAP_ID),
 		}),
 		svelte({
 			// enable run-time checks when not in production
