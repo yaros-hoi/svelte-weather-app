@@ -4,7 +4,7 @@
 	import { location, getLocation } from './../store/location.js';
 
 	onMount(async ()=> {
-        mapboxgl.accessToken = __myapp.env.MAP_TOKEN;
+        mapboxgl.accessToken = MAP_TOKEN;
 
 		try {
             await getLocation();
